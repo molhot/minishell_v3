@@ -12,18 +12,6 @@
 
 #include "../minishell.h"
 
-void	quote_append(char **args, char **new_word)
-{
-	char	*tmp;
-
-	(*args)++;
-	tmp = *args;
-	if (*(tmp - 1) == '\'')
-		append_single(&(*args), &(*new_word));
-	else if (*(tmp - 1) == '\"')
-		append_double(&(*args), &(*new_word));
-}
-
 void	check_doller(char **rest, char *p, t_redirect *redirect)
 {
 	char	*name;
