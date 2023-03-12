@@ -32,10 +32,12 @@ void	check_doller(char **rest, char *p, t_redirect *redirect)
 		append_char(&name,*p++);
 	value = map_get(g_env, name);
 	free(name);
+	value = ft_strtrim(value, " ");
 	if (value == NULL || ft_strchr(value, ' ') != NULL)
 		redirect->ambigous = true;
 	else
 		redirect->ambigous = false;
+	free(value);
 	*rest = p;
 }
 
@@ -66,6 +68,35 @@ void	specialparam_check(t_redirect *redirect)
 	}
 }
 
+static void	expand_doller_red(char **dst, char **rest, char *p)
+{
+	char	*name;
+	char	*value;
+	char	*f_value;
+
+	name = calloc(1, sizeof(char));
+	if (name == NULL)
+		fatal_error("calloc");
+	p++;
+	if (!isalpha(*p) && *p != '_')
+	{
+		free(name);
+		return (not_expnad(&(*dst), &(*rest), p));
+	}
+	append_char(&name,*p++);
+	while (ft_isalpha(*p) != 0 || *p == '_' || ft_isdigit(*p) != 0)
+		append_char(&name,*p++);
+	value = map_get(g_env, name);
+	value = ft_strtrim(value, " ");
+	f_value = value;
+	free(name);
+	if (value)
+		while (*value)
+			append_char(dst, *value++);
+	free(f_value);
+	*rest = p;
+}
+
 char	*expand_args_redirect(char *args, char *args_free)
 {
 	char	*new_word;
@@ -80,7 +111,7 @@ char	*expand_args_redirect(char *args, char *args_free)
 		else if (*args == '$' && *(args + 1) == '?')
 			expand_dolleeques(&new_word, &args, args);
 		else if (*args == '$')
-			expand_doller(&new_word, &args, args);
+			expand_doller_red(&new_word, &args, args);
 		else
 			append_char(&new_word, *args++);
 	}
