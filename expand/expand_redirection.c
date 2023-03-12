@@ -75,7 +75,7 @@ char	*expand_args_redirect(char *args, char *args_free)
 	{
 		if (*args == '\\')
 			b_slush_append(&args, &new_word);
-		if ((*args == '\'' || *args == '\"') && *(args + 1) != '\0')
+		else if ((*args == '\'' || *args == '\"') && *(args + 1) != '\0')
 			quote_append(&args, &new_word);
 		else if (*args == '$' && *(args + 1) == '?')
 			expand_dolleeques(&new_word, &args, args);

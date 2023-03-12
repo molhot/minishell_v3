@@ -32,6 +32,8 @@ bool	wd_check_inquote(char **str, char *tmp_str)
 	{
 		while (**str != '\'' && **str != '\"')
 		{
+			if (*(*str + 1) == '\0' && **str == '\\')
+				return (show_error(tmp_str, ft_strlen(tmp_str)));
 			if (**str == '\0')
 				return (true);
 			after_backslush(&(*str), '\"');
