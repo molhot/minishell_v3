@@ -39,13 +39,7 @@ static char	*expand_args_quote(char *args, char *args_free)
 		if (*args == '\\')
 			b_slush_append(&args, &new_word);
 		else if ((*args == '\'' || *args == '\"') && *(args + 1) != '\0')
-		{
-			args++;
-			if (*(args - 1) == '\'')
-				append_single(&args, &new_word);
-			else if (*(args - 1) == '\"')
-				append_double(&args, &new_word);
-		}
+			quote_append(&args, &new_word);
 		else if (*args == '$')
 			switch_quote_doller(&args, &new_word);
 		else

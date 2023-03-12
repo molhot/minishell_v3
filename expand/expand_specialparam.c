@@ -12,6 +12,21 @@
 
 #include "../minishell.h"
 
+static void	switch_doller(char **new_word, char **args)
+{
+	if (**args == '$' && *(*args + 1) == '\0')
+	{
+		append_char(&(*new_word), **args);
+		(*args)++;
+	}
+	else if (**args == '$' && (*(*args + 1) == '\'' || *(*args + 1) == '\"'))
+		(*args)++;
+	else if (**args == '$' && *(*args + 1) == '?')
+		expand_dolleeques(&(*new_word), &(*args), *args);
+	else if (**args == '$')
+		expand_doller(&(*new_word), &(*args), *args);
+}
+
 static void	quote_append_indoller(char type, char **new, char **args)
 {
 	append_char(&(*new), **args);
@@ -42,8 +57,7 @@ static char	*expand_args_doller(char *args)
 		if (*args == '\\')
 		{
 			append_char(&new_word, *args++);
-			if (*args != '\0')
-				append_char(&new_word, *args++);
+			append_char(&new_word, *args++);
 		}
 		else if (*args == '\'' || *args == '\"')
 			quote_append_indoller(*args, &new_word, &args);

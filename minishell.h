@@ -6,7 +6,7 @@
 /*   By: mochitteiunon? <sakata19991214@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/03/12 12:38:48 by mochitteiun      ###   ########.fr       */
+/*   Updated: 2023/03/12 13:08:08 by mochitteiun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,11 +188,11 @@ bool		word_blankcheck(char *string);
 void		remake_token(t_token *token, t_token *re_token);
 void		expand_export(t_token *token);
 void		export_argsremake(t_token *token);
-void		switch_doller(char **new_word, char **args);
 void		check_inquote(char type, char **args);
 void		b_slush_append(char **args, char **new_wd);
 char		*expand_args_redirect(char *args, char *args_free);
 void		specialparam_check(t_redirect *redirect);
+void		quote_append(char **args, char **new_word);
 
 /************* signal handler ************/
 

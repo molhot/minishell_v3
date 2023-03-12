@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_appendchar.c                                :+:      :+:    :+:   */
+/*   appendchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mochitteiunon? <sakata19991214@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:03:13 by satushi           #+#    #+#             */
-/*   Updated: 2023/03/12 04:34:27 by mochitteiun      ###   ########.fr       */
+/*   Updated: 2023/03/12 13:18:10 by mochitteiun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,16 @@ void	append_double(char **args, char **new)
 		}
 	}
 	(*args)++;
+}
+
+void	quote_append(char **args, char **new_word)
+{
+	char	*tmp;
+
+	(*args)++;
+	tmp = *args;
+	if (*(tmp - 1) == '\'')
+		append_single(&(*args), &(*new_word));
+	else if (*(tmp - 1) == '\"')
+		append_double(&(*args), &(*new_word));
 }
