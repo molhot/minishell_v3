@@ -17,8 +17,9 @@ void	check_inquote(char type, char **args)
 	(*args)++;
 	while (**args != type)
 	{
-		if (**args == '\\')
-			(*args)++;
+		if (type == '\"')
+			if (**args == '\\')
+				(*args)++;
 		(*args)++;
 	}
 	(*args)++;

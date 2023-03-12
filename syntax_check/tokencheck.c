@@ -6,7 +6,7 @@
 /*   By: mochitteiunon? <sakata19991214@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 18:01:14 by satushi           #+#    #+#             */
-/*   Updated: 2023/03/11 00:18:55 by mochitteiun      ###   ########.fr       */
+/*   Updated: 2023/03/12 19:40:24 by mochitteiun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ bool	show_error(char *s, size_t charlen)
 {
 	if (s[charlen - 1] == '\\')
 	{
-		printf("bash: syntax error near newline `%s'\n", "\\n");
+		printf("-minishell: syntax error near newline `%s`\n", "\\n");
 		return (false);
 	}
-	printf("bash: syntax error near quote `%s'\n", s);
+	printf("-minishell: syntax error near quote `%s`\n", s);
 	return (false);
 }
 
